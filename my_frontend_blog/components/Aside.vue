@@ -1,54 +1,22 @@
 <template>
-  <div className="col-md-4">
-    <div className="card my-4">
-      <h5 className="card-header">Теги</h5>
-      <div className="card-body">
-        <div className="d-flex flex-wrap">
-          <a href="" className="m-2 h5">#CSS</a>
-          <a href="" className="m-2 h5">#JavaScript</a>
-          <a href="" className="m-2 h5">#DRF</a>
-          <a href="" className="m-2 h5">#NuxtJS</a>
-          <a href="" className="m-2 h5">#Django</a>
-          <a href="" className="m-2 h5">#VueJS</a>
+  <div class="col-md-4">
+    <div class="card my-4">
+      <h5 class="card-header">Теги</h5>
+      <div class="card-body">
+        <div class="d-flex flex-wrap">
+          <nuxt-link :to="`/tags/${tag.name}`" class="m-2 h5" v-for="tag in tags" :key="tag.name">#{{tag.name}}</nuxt-link>
         </div>
       </div>
     </div>
 
-    <div className="card my-4">
-      <h5 className="card-header">Последние статьи</h5>
-      <div className="card-body">
-        <h5 className="card-title">Раз пост</h5>
-        <p className="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный
-          текст.</p>
-        <a href="#" className="card-link">Ссылка на статью</a>
-      </div>
-      <hr>
-      <div className="card-body">
-        <h5 className="card-title">Два пост</h5>
-        <p className="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный
-          текст.</p>
-        <a href="#" className="card-link">Ссылка на статью</a>
-      </div>
-      <hr>
-      <div className="card-body">
-        <h5 className="card-title">Три пост</h5>
-        <p className="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный
-          текст.</p>
-        <a href="#" className="card-link">Ссылка на статью</a>
-      </div>
-      <hr>
-      <div className="card-body">
-        <h5 className="card-title">Четыре пост</h5>
-        <p className="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный
-          текст.</p>
-        <a href="#" className="card-link">Ссылка на статью</a>
-      </div>
-      <hr>
-      <div className="card-body">
-        <h5 className="card-title">Пять пост</h5>
-        <p className="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный
-          текст.</p>
-        <a href="#" className="card-link">Ссылка на статью</a>
+    <div class="card my-4">
+      <h5 class="card-header">Последние статьи</h5>
+      <div class="card-body" v-for="post in aside" :key="post.id">
+        <h5 class="card-title">{{post.h1}}</h5>
+        <img :src="post.image" alt="" class="card-img-top">
+        <div v-html="post.description" class="truncate"></div>
+        <nuxt-link :to="`/posts/${post.slug}`" class="card-link">Ссылка на статью</nuxt-link>
+        <hr>
       </div>
     </div>
   </div>
@@ -56,7 +24,8 @@
 
 <script>
 export default {
-  name: "aside.vue"
+  name: "aside.vue",
+  props: ['tags', 'aside']
 }
 </script>
 
