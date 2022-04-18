@@ -79,6 +79,7 @@
 import axios from "axios";
 import Header from "@/components/Header";
 import { required, minLength, email } from 'vuelidate/lib/validators'
+
 export default {
   components: {Header},
   layout: "post_detail",
