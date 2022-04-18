@@ -1,3 +1,4 @@
+
 <template>
   <div class="container">
     <h1 class="my-3">Последние записи блога</h1>
@@ -59,6 +60,7 @@ export default {
     }
   },
   async asyncData({route}) {
+    console.log(route.query.page)
     let page = route.query.page !== undefined ? `?page=${route.query.page}` : '';
     const { data } = await axios.get(`http://127.0.0.1:8000/api/posts/${page}`);
     let next = data.next != null ? data.next.split('/')[5] : data.next;
@@ -72,9 +74,17 @@ export default {
       current_page: Number(current_page)
     }
   },
+  head() {
+    return {
+      title: "Главная страница блога",
+      meta: [
+        { hid: "description", name: "description", content: "Это дискрипшн тут мы пишем текст не более 250 символов."},
+        { hid: "keywords", name: "keywords", content: "keyword 1, keyword 2"},
+      ]
+    }
+  },
 }
 </script>
 
 <style>
-
 </style>
